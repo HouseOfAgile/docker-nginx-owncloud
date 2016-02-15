@@ -21,6 +21,7 @@ Once both nginx container are setup you can build it and launch it.
 For personal use, sqlite should be fine, but of course you can choose any of the provided database driver, you will just have to customize the install command line.
 
 Connect to your docker owncloud container and install owncloud
+
     docker exec -it someserver-owncloud bash
     
     root@someserver-owncloud:/# cd /var/www/owncloud/
@@ -29,5 +30,6 @@ Connect to your docker owncloud container and install owncloud
     
 
 ### Add your domain name to the trusted server config
+
     sed -i "/.*0 => 'localhost',/a \\    1 => 'someserver.example.com'," /var/www/owncloud/config/config.php
 
