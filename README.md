@@ -33,3 +33,14 @@ Connect to your docker owncloud container and install owncloud
 
     sed -i "/.*0 => 'localhost',/a \\    1 => 'someserver.example.com'," /var/www/owncloud/config/config.php
 
+## Caveats
+
+As this owncloud will be behind the jwilder proxy, you might need to change the max upload size for files, as you want to have huge files on your owncloud =] By default, the jwilder proxy container is limited, but then [explain you how to change it](https://github.com/jwilder/nginx-proxy#proxy-wide)
+
+As an example here is how we run it with a 512M limit:
+
+    docker run -d -p 80:80 -p 443:443 --name nginx-proxy -v /var/local/nginx/certs:/etc/nginx/certs:ro -v /home/hoauser/work/nginx-conf/fat_body_size.conf:/etc/nginx/conf.d/fat_body_size.conf -v /etc/nginx/vhost.d -v /usr/share/nginx/html -v /var/run/docker.sock:/tmp/docker.sock:ro jwilder/nginx-proxy
+    hoauser@server:~/work/nginx-conf$ cat /home/hoauser/work/nginx-conf/fat_body_size.conf
+    client_max_body_size 512m;
+
+
