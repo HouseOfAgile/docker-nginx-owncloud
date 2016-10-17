@@ -13,7 +13,7 @@ Once both nginx container are setup you can build it and launch it.
 
     docker build -t "houseofagile/docker-nginx-owncloud:latest" .
 
-    docker run -e VIRTUAL_HOST="someserver.example.com" -e LETSENCRYPT_HOST="someserver.example.com" -e LETSENCRYPT_EMAIL="jc@houseofagile.com" -d --name someserver-owncloud -h someserver-owncloud -P houseofagile/docker-nginx-owncloud:latest
+    PROJECT_NAME=someserver-owncloud && DOMAIN_NAMES="someserver.example.com" && docker run -e VIRTUAL_HOST="$DOMAIN_NAMES" -e LETSENCRYPT_HOST="$DOMAIN_NAMES" -e LETSENCRYPT_EMAIL="jc@houseofagile.com" -h $PROJECT_NAME --name $PROJECT_NAME -d -P houseofagile/docker-nginx-owncloud:latest
     
 ## Post Install
 ### Install owncloud
